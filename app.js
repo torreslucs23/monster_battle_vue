@@ -30,9 +30,15 @@ const app = Vue.createApp({
   },
   computed: {
     monsterBarStyles() {
+      if (this.monsterHealth <= 0) {
+        return { width: "0" + "%" };
+      }
       return { width: this.monsterHealth + "%" };
     },
     playerBarStyles() {
+      if (this.playerHealth <= 0) {
+        return { width: "0" + "%" };
+      }
       return { width: this.playerHealth + "%" };
     },
     canUseSpecial() {
@@ -43,6 +49,15 @@ const app = Vue.createApp({
     },
   },
   methods: {
+    startGame() {
+      this.playerHealth = 100;
+      this.monsterHealth = 100;
+      this.roundSpecial = 0;
+      this.roundHeal = 0;
+      this.winner = null;
+      // monsterBarStyles();
+      // playerBarStyles();
+    },
     attackMonster() {
       this.roundHeal++;
       this.roundSpecial++;
@@ -68,6 +83,14 @@ const app = Vue.createApp({
       } else {
         this.playerHealth += heal;
       }
+    },
+    surrender() {
+      this.winner = "monster";
+    },
+    addLogMessage(who, what, value) {
+      return {
+        who: who,
+      };
     },
   },
 });
