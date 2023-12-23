@@ -46,7 +46,11 @@
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="message in messages">
+            {{message.who}} - {{message.what}} - {{message.value}}
+          </li>
+        </ul>
       </section>
     </div>
   </body>
