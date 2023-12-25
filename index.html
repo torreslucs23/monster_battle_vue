@@ -48,7 +48,19 @@
         <h2>Battle Log</h2>
         <ul>
           <li v-for="message in messages">
-            {{message.who}} - {{message.what}} - {{message.value}}
+            <span
+              :class="{'log--player': message.who === 'player' , 'log--monster': message.who === 'monster'}"
+            >
+              {{message.who === 'player' ? 'Player' : 'Monster'}}
+            </span>
+            <span v-if="message.what === 'heal'">
+              heals himself for
+              <span class="log--heal"> {{message.value}}</span>
+            </span>
+            <span v-else>
+              attacks and deals
+              <span class="log--damage">{{message.value}}</span>
+            </span>
           </li>
         </ul>
       </section>
